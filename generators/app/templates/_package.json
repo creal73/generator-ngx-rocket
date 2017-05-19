@@ -13,6 +13,12 @@
     "translations:extract": "ng2-translate-extract --dir ./src --output ./src/translations --format=json --clean",
     "docs": "hads ./docs -o",
     "env": "env2json npm_package_version -o src/environments/.env.json",
+  <% if (props.target !== 'web') { -%>
+    "prepare": "npm run build && cordova prepare",
+    "package": "cordova build --device",
+    "run": "cordova run",
+    "cordova": "cordova",
+  <% } -%>
     "generate": "ng generate"
   },
   "dependencies": {
@@ -34,6 +40,9 @@
     "zone.js": "^0.8.4"
   },
   "devDependencies": {
+  <% if (props.target !== 'web') { -%>
+    "cordova": "^7.0.0",
+  <% } -%>
     "@angular/cli": "^1.0.0",
     "@angular/compiler-cli": "^4.0.0",
     "@biesbjerg/ng2-translate-extract": "^0.6.0",
